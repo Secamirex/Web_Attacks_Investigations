@@ -85,19 +85,19 @@ https://172.16.17.18/search/?q=1' ORDER BY 3--+
 Web server WAF detected  Javascript Code in the URL and sent the below alert to the SIEM.
 
 
-EventID:116
-Event Time :Feb, 26, 2022, 06:56 PM
-Rule : SOC166 - Javascript Code Detected in Requested URL
-Level : Security Analyst
-Hostname :WebServer1002
-Destination IP Address :172.16.17.17
-Source IP Address :112.85.42.13
-HTTP Request Method :GET
-Requested URL :
-https://172.16.17.17/search/?q=<$script>javascript:$alert(1)<$/script>
-User-Agent :Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1
-Alert Trigger Reason :Javascript code detected in URL
-Device Action :Allowed
+	EventID:116
+	Event Time :Feb, 26, 2022, 06:56 PM
+	Rule : SOC166 - Javascript Code Detected in Requested URL
+	Level : Security Analyst
+	Hostname :WebServer1002
+	Destination IP Address :172.16.17.17
+	Source IP Address :112.85.42.13
+	HTTP Request Method :GET
+	Requested URL :
+	https://172.16.17.17/search/?q=<$script>javascript:$alert(1)<$/script>
+	User-Agent :Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1
+	Alert Trigger Reason :Javascript code detected in URL
+	Device Action :Allowed
 
 
 Filtering out HTTPS traffic on SIEM based on the source IP address to investigate all the requests.  
@@ -134,41 +134,32 @@ Checking the response error code 302 also confirms that the attack was unsuccess
 # Case # 3 : Investigating a possible  IDOR (Insecure Direct Object Reference) attack
 
 Web server WAF detected a possible IDOR attack, triggering an alert on SIEM.
-EventID :
-119
-Event Time :
-Feb, 28, 2022, 10:48 PM
-Rule :
-SOC169 - Possible IDOR Attack Detected
-Level :
-Security Analyst
-Hostname :
-WebServer1005
-Destination IP Address :
-172.16.17.15
-Source IP Address :
-134.209.118.137
-HTTP Request Method :
-POST
-Requested URL :
-https://172.16.17.15/get_user_info/
-User-Agent :
-Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322)
-Alert Trigger Reason :
-consecutive requests to the same page
-Device Action :
-Allowed
+
+	EventID :119
+	Event Time :Feb, 28, 2022, 10:48 PM
+	Rule :SOC169 - Possible IDOR Attack Detected
+	Level :Security Analyst
+	Hostname :WebServer1005
+	Destination IP Address :172.16.17.15
+	Source IP Address :134.209.118.137
+	HTTP Request Method :POST
+	Requested URL :https://172.16.17.15/get_user_info/
+	User-Agent :Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322)
+	Alert Trigger Reason :consecutive requests to the same page
+	Device Action :Allowed
 
 Filtering HTTPS traffic on SIEM based on the source IP address to investigate all the requests.  Traffic was initiated from the internet to the inside network.
+
 ![image](https://github.com/user-attachments/assets/ad162cbd-34a0-46ed-ba14-d4452307b0f5)
 
 Checking the "Requests URL" parameters  sent to the web server on all requests coming from this IP - 134.209.118.137. 
-after checking  "user_id" parameter supplied as part of the POST method, Attacker has tried to gain lateral access using different user ids . The following 'user_id' are submitted to the web server 
+Also searching for "user_id" parameter supplied as part of the POST method confirms attacker has tried to gain lateral access using different user ids . The following 'user_id' are submitted to the web server 
 
 - user_id=1
 - user_id=2
 - user_id=3
 - user_id=5
+  
 ![image](https://github.com/user-attachments/assets/887ec2d2-4d19-4ed2-86c5-78ebec039366)
 
 Webserver has responded with status code 200 confirming the IDOR attack was successfully executed on the web server. case has been escalated for further investigation.  
