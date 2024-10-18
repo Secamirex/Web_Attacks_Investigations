@@ -77,7 +77,7 @@ https://172.16.17.18/search/?q=1' ORDER BY 3--+
 -The attacker used the user agent "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1."
 -The server's " HTTP Response Status" of 500 confirms that the SQL attack was unsuccessful. Hence, no escalation was required. 
 
-[#################################################################################################]
+[##############################################################################]
 
 
 # Case # 2 : Investigating a possible XSS attack
@@ -129,7 +129,7 @@ Checking the response error code 302 also confirms that the attack was unsuccess
 ![image](https://github.com/user-attachments/assets/6d552400-289a-471b-a867-a7caef97f9c9)
 
 
-[#################################################################################################]
+[##############################################################################]
 
 # Case # 3 : Investigating a possible  IDOR (Insecure Direct Object Reference) attack
 
