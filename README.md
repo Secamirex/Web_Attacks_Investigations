@@ -19,13 +19,14 @@ Web server WAF detected an SQL Injection payload, triggering an alert on SIEM.
  
 Filtering HTTPS traffic on SIEM based on the source IP address to investigate all the requests.  Traffic was initiated from the internet to the inside network.
 	
-![image](https://github.com/user-attachments/assets/c94d27ca-2de5-4e5b-bd21-fd1798c5dca9)
+![image](https://github.com/user-attachments/assets/70e19b77-f0fb-4b8f-be2f-e0239b71322a)
+
 
 
  
- Checking the "Requests URL" parameters  sent to the web server on all requests coming from this IP - 167.99.169.17
+Checking the "Requests URL" parameters  sent to the web server on all requests coming from this IP - 167.99.169.17
 
-![image](https://github.com/user-attachments/assets/36b5b831-c6e0-4055-9cfa-2d8a30d9a9c9)
+![image](https://github.com/user-attachments/assets/9f4b08a3-4e7e-4ed2-b474-04b55215eb3e)
 
 
 Decoding the URL in CyberChef confirms the SQL injection attack on the following three requests
@@ -34,29 +35,30 @@ https://172.16.17.18/search/?q=' OR '1
 https://172.16.17.18/search/?q=' OR 'x'='x
 https://172.16.17.18/search/?q=1' ORDER BY 3--+
 
-![image](https://github.com/user-attachments/assets/fc1042dd-6ce6-492b-8d87-f8cf8b26fe82)
+![image](https://github.com/user-attachments/assets/41cd166e-c744-44ae-b4d4-33c2b6dd1056)
+
 	
 	
  
 
- Also, Checking the source IP on 'VirusTotal' confirms that the IP is malicious 
-	
-![image](https://github.com/user-attachments/assets/c8d1bdee-7d52-4b82-bc18-aab4b3457582)
+Also, Checking the source IP on 'VirusTotal' confirms that the IP is malicious 
 	
 
-
-
- Now checking the HTTP response to determine if the attack was successful and if escalation is required. The web server has responded with status response 500, confirming the attack was unsuccessful. Hence, no escalation was carried out. 
+![image](https://github.com/user-attachments/assets/79ded74e-aa8a-4fed-bc22-3bd0b74f73bb)
 	
-![image](https://github.com/user-attachments/assets/b9a3fa39-55ec-4970-bc1b-0d690a5c50e5)
 
+
+
+Now checking the HTTP response to determine if the attack was successful and if escalation is required. The web server has responded with status response 500, confirming the attack was unsuccessful. Hence, no escalation was carried out. 
+	
+![image](https://github.com/user-attachments/assets/02549816-e9b1-4262-bf74-6b2d684ff2e2)
 
 
 
 Extracted artifacts
 
+![image](https://github.com/user-attachments/assets/b79db505-f190-469d-aac4-873e635126ad)
 
-![image](https://github.com/user-attachments/assets/831faf9d-0727-49e2-b26b-928294673e0f)
 
 
 
